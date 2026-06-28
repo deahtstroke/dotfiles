@@ -1,0 +1,36 @@
+return {
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   version = '*',
+  --   dependencies = 'nvim-tree/nvim-web-devicons',
+  --   opts = {
+  --     options = {
+  --       custom_filter = function(buf_number, buf_numbers)
+  --         if vim.bo[buf_number].buftype == 'nofile' then
+  --           return false
+  --         end
+  --
+  --         if vim.bo[buf_number].filetype == 'qf' or vim.bo[buf_number].filetype == 'help' then
+  --           return false
+  --         end
+  --
+  --         if vim.fn.bufname(buf_number) == '[No Name]' then
+  --           return false
+  --         end
+  --
+  --         return true
+  --       end,
+  --       offsets = {
+  --         {
+  --           filetype = 'neo-tree',
+  --           text = 'File Explorer',
+  --           text_align = 'center',
+  --           highlight = 'Directory',
+  --           separator = true,
+  --         },
+  --       },
+  --       color_icons = true,
+  --     },
+  --   },
+  -- },
+}
