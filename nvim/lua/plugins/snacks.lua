@@ -28,6 +28,17 @@ return {
     },
     keys = {
       {
+        '<leader>sn',
+        function()
+          require('snacks').picker.notifications {
+            matcher = {
+              frecency = true,
+            },
+            ui_select = true,
+          }
+        end,
+      },
+      {
         '<leader><space>',
         function()
           require('snacks').picker.smart {

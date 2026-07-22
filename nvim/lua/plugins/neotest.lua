@@ -4,8 +4,6 @@ return {
     dependencies = {
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
-      'antoinemadec/FixCursorHold.nvim',
-      'fredrikaverpil/neotest-golang',
       {
         'nvim-treesitter/nvim-treesitter',
         build = function()
@@ -20,6 +18,26 @@ return {
         end,
       },
     },
+    config = function()
+      local config = {
+        runner = 'gotestsum',
+      }
+      require('neotest').setup {
+        running = {
+          concurrent = true,
+        },
+        output_panel = {
+          enabled = true,
+          open = 'botright split | resize 15',
+        },
+        output = {
+          open_on_run = true,
+        },
+        adapters = {
+          require 'neotest-golang'(config),
+        },
+      }
+    end,
     keys = {
       {
         '<leader>t',
@@ -29,7 +47,12 @@ return {
       {
         '<leader>tt',
         function()
-          require('neotest').run.run()
+          local neotest = require 'neotest'
+          neotest.run.run()
+          neotest.output.open { last_run = true }
+          neotest.summary.open {
+            enter = false,
+          }
         end,
         desc = '[T]est Code under cursor',
       },
@@ -49,26 +72,6 @@ return {
         end,
         desc = '[T]est and Open [S]ummary',
       },
-      {
-        '<leader>tn',
-        function()
-          local neotest = require 'neotest'
-          neotest.run.run { strategy = 'dap' }
-          neotest.summary.open()
-        end,
-        desc = '[T]est, Debug, and Ope[N] summary',
-      },
     },
-    config = function()
-      local config = {
-        runner = 'gotestsum',
-      }
-      require('neotest').setup {
-        log_level = 'info',
-        adapters = {
-          require 'neotest-golang'(config),
-        },
-      }
-    end,
   },
 }

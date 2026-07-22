@@ -1,5 +1,5 @@
 return {
-  { -- Linting
+  {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
@@ -8,7 +8,7 @@ return {
         markdown = { 'markdownlint' },
         dockerfile = { 'hadolint' },
         json = { 'jsonlint' },
-        sql = { 'eugene' },
+        sql = { 'sqlfluff' },
       }
 
       -- Create autocommand which carries out the actual linting

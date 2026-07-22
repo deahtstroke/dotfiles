@@ -21,6 +21,11 @@ return {
       local disable_filetypes = { c = true, cpp = true }
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return nil
+      elseif vim.bo[bufnr].filetype == 'sql' then
+        return {
+          timeout_ms = 10000,
+          lsp_format = 'fallback',
+        }
       else
         return {
           timeout_ms = 500,
@@ -30,10 +35,11 @@ return {
       end
     end,
     formatters_by_ft = {
-      go = { 'goimports', 'gofumpt' },
+      go = { 'gofumpt' },
       lua = { 'stylua' },
-      sql = { 'pg_format' },
+      sql = { 'sqlfluff' },
       markdown = { 'prettier', 'markdownlint-cli2', stop_after_first = true },
+      json = { 'prettier', 'jq' },
     },
   },
 }

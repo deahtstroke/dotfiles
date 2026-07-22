@@ -109,7 +109,7 @@ return {
       local servers = {
         svelte = {},
         gopls = {},
-        sqls = {},
+        postgres_lsp = {},
         ts_ls = {
           filetypes = {
             'svelte',

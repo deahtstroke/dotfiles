@@ -16,16 +16,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  {
-    'rebelot/kanagawa.nvim',
-    opts = {
-      undercurl = false,
-      background = {
-        dark = 'wave',
-        light = 'lotus',
-      },
-    },
-  },
   { import = 'plugins' },
 }, {
   checker = {
@@ -33,10 +23,10 @@ require('lazy').setup({
     notify = true,
     frequency = 3600,
   },
+  install = { colorscheme = { 'tokyonight', 'habamax' } },
   auto_install = true,
+  news = {
+    lazyvim = true,
+    neovim = false,
+  },
 })
-
-local ok, _ = pcall(vim.cmd, 'colorscheme kanagawa')
-if not ok then
-  vim.cmd.colorscheme 'kanagawa'
-end
