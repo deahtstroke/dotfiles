@@ -85,3 +85,26 @@ vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 
 vim.o.foldenable = true
+
+-- Sessions @auto-session options
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
+-- Clipboarding in WSL
+local isWindows = vim.fn.has 'win32' == 1 or vim.fn.has 'win64' == 1
+
+if isWindows then
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = 'win32yank.exe -i --crlf',
+      ['*'] = 'win32yank.exe -i --clrf',
+    },
+    paste = {
+      ['+'] = 'win32yank.exe -o --lf',
+      ['*'] = 'win32yank.exe -o --lf',
+    },
+    cache_enabled = 0,
+  }
+
+  vim.opt.clipboard = 'unnamedplus'
+end
