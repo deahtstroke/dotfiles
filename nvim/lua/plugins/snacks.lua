@@ -4,7 +4,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      image = { enabled = false },
+      image = { enabled = true },
       bigfile = { enabled = true },
       dashboard = {
         enabled = true,
@@ -23,7 +23,15 @@ return {
       scope = { enabled = true },
       scroll = { enabled = true },
       statuscolumn = { enabled = true },
-      terminal = { enabled = true },
+      terminal = {
+        enabled = true,
+        win = {
+          show = true,
+          enter = true,
+          position = 'bottom',
+        },
+        shell = 'zsh',
+      },
       words = { enabled = true },
     },
     keys = {
@@ -37,6 +45,7 @@ return {
             ui_select = true,
           }
         end,
+        desc = '[S]earch [N]otifications',
       },
       {
         '<leader><space>',
@@ -76,13 +85,6 @@ return {
           Snacks.picker.recent {}
         end,
         desc = '[S]earch [R]ecent',
-      },
-      {
-        '<leader>gN',
-        function()
-          require('snacks').picker.notifications()
-        end,
-        desc = '[G]oto [N]otifications',
       },
       -- LSP functionalities
       {

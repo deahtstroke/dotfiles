@@ -23,12 +23,15 @@ return {
         runner = 'gotestsum',
       }
       require('neotest').setup {
+        diagnostic = {
+          enabled = false,
+        },
         running = {
           concurrent = true,
         },
         output_panel = {
-          enabled = true,
-          open = 'botright split | resize 15',
+          enabled = false,
+          open = 'botright split | resize 20',
         },
         output = {
           open_on_run = true,
@@ -50,9 +53,7 @@ return {
           local neotest = require 'neotest'
           neotest.run.run()
           neotest.output.open { last_run = true }
-          neotest.summary.open {
-            enter = false,
-          }
+          neotest.summary.open()
         end,
         desc = '[T]est Code under cursor',
       },
