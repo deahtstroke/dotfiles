@@ -48,6 +48,13 @@ return {
         desc = '[S]earch [N]otifications',
       },
       {
+        '<leader>sk',
+        function()
+          require('snacks').picker.keymaps()
+        end,
+        desc = '[S]earch [K]eymaps',
+      },
+      {
         '<leader><space>',
         function()
           require('snacks').picker.smart {
@@ -85,6 +92,35 @@ return {
           Snacks.picker.recent {}
         end,
         desc = '[S]earch [R]ecent',
+      },
+      -- Diagnostics
+      {
+        '<leader>xX',
+        function()
+          require('snacks').picker.diagnostics()
+        end,
+        desc = 'Show Diagnostics (All)',
+      },
+      {
+        '<leader>xx',
+        function()
+          require('snacks').picker.diagnostics_buffer()
+        end,
+        desc = 'Show Diagnostics (Current buffer)',
+      },
+      {
+        '<leader>xe',
+        function()
+          require('snacks').picker.diagnostics_buffer { severity = vim.diagnostic.severity.ERROR }
+        end,
+        desc = 'Show [E]rror Diagnostics (Current buffer)',
+      },
+      {
+        '<leader>xE',
+        function()
+          require('snacks').picker.diagnostics { severity = vim.diagnostic.severity.ERROR }
+        end,
+        desc = 'Show [E]rror Diagnostics (All)',
       },
       -- LSP functionalities
       {
