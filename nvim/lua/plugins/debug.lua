@@ -95,6 +95,13 @@ return {
         },
       })
 
+      table.insert(dap.configurations['go'], {
+        type = 'go_remote',
+        name = 'Connect to headless dlv-dap',
+        request = 'attach',
+        mode = 'remote',
+      })
+
       require('mason-nvim-dap').setup {
         -- Makes a best effort to setup the various debuggers with
         -- reasonable debug configurations

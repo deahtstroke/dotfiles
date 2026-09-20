@@ -1,40 +1,45 @@
 return {
-  { -- Highlight, edit, and navigate code
+  {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
-    main = 'nvim-treesitter.configs',
-    version = false,
+    branch = 'main',
     lazy = false,
     build = ':TSUpdate',
-    opts = {
-      ensure_installed = {
-        'bash',
-        'c',
-        'go',
-        'diff',
-        'html',
+    config = function()
+      local ts = require 'nvim-treesitter'
+
+      local parsers = {
         'lua',
-        'luadoc',
-        'markdown',
-        'markdown_inline',
-        'query',
         'vim',
         'vimdoc',
-        'svelte',
+        'query',
+        'markdown',
+        'markdown_inline',
+        'go',
+        'java',
+        'c',
         'javascript',
         'typescript',
-        'css',
-        'scss',
-      },
-      sync_install = true,
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-    },
-    config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
+      }
+
+      ts.install(parsers)
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function()
+          local lang = vim.treesitter.language.get_lang(vim.bo.filetype)
+          if lang and vim.treesitter.language.add(lang) then
+            vim.treesitter.start()
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function()
+          vim.wo.foldmethod = 'expr'
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        end,
+      })
     end,
   },
 }
