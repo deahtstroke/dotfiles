@@ -53,7 +53,6 @@ return {
           local neotest = require 'neotest'
           neotest.run.run()
           neotest.output.open { last_run = true }
-          neotest.summary.open()
         end,
         desc = '[T]est Code under cursor',
       },

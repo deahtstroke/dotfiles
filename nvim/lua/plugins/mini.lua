@@ -16,6 +16,24 @@ return {
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
+    require('mini.sessions').setup {
+      autoread = true,
+      autowrite = true,
+      directory = vim.fn.stdpath 'data' .. '/sessions',
+      file = 'Session.vim',
+    }
+
+    vim.api.nvim_create_autocmd('VimEnter', {
+      group = vim.api.nvim_create_augroup('MiniSession', { clear = true }),
+      callback = function()
+        if vim.fn.argc() == 0 then
+          local local_session = vim.fn.getcwd() .. '/Session.vim'
+          if vim.fn.filereadable(local_session) == 1 then
+            require('mini.sessions').read 'Session.vim'
+          end
+        end
+      end,
+    })
 
     -- Simple and easy statusline.
     --  You could remove this setup call if you don't like it,

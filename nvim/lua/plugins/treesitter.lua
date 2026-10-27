@@ -6,7 +6,6 @@ return {
     build = ':TSUpdate',
     config = function()
       local ts = require 'nvim-treesitter'
-
       local parsers = {
         'lua',
         'vim',
